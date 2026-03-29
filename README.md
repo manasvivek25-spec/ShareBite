@@ -6,7 +6,7 @@
 
 ## The Idea
 
-Every day, a huge amount of food gets wasted while many people still struggle to find meals. The main problem isn’t the lack of food—it’s the lack of a system that connects people who have extra food with those who need it, in real time.
+Every day, a huge amount of food is wasted while many people still struggle to find meals. The issue isn’t the lack of food—it’s the lack of a real-time system that connects people who have extra food with those who need it.
 
 That’s where **ShareBite** comes in.
 
@@ -14,38 +14,41 @@ That’s where **ShareBite** comes in.
 
 ## What ShareBite Does
 
-ShareBite is a simple and real-time platform where:
+**ShareBite** is a real-time food redistribution platform that connects donors, receivers, and delivery agents.
 
-* Donors can quickly share details about surplus food
-* Receivers can instantly see available food nearby
-* Food can be accepted and redistributed without delay
+* Donors can quickly post surplus food
+* Receivers can instantly view available food nearby
+* Delivery agents help transport food efficiently
 
-The app also prioritizes food based on expiry so that items that may go bad soon are handled first.
+The system also prioritizes food based on expiry so that urgent items are handled first, reducing waste.
 
 ---
 
 ## Key Features
 
-* Real-time updates using Firebase
-* Separate flows for Donors and Receivers
+* Real-time updates using Firebase Firestore
+* Role-based system: Donor, Receiver, Delivery Agent
 * Expiry-based prioritization (urgent food first)
-* Location-based navigation (opens in Google Maps)
-* Accept feature to prevent multiple claims
-* Clean and easy-to-use interface
+* Location-based navigation (Google Maps integration)
+* Automated delivery assignment system
+* Delivery tracking (Pending → Picked → Delivered)
+* Delivery history tracking
+* Accept system to prevent duplicate claims
+* Clean and user-friendly interface
 
 ---
 
 ## Built With
 
-* Flutter (UI)
-* Firebase Firestore (Database)
-* Dart
+* **Flutter** – UI development
+* **Firebase Firestore** – Real-time database
+* **Dart** – Programming language
 
 ---
 
 ## Running the App
 
-If you want to try it locally:
+To run the project locally:
 
 ```bash
 git clone https://github.com/manasvivek25-spec/ShareBite.git
@@ -60,38 +63,39 @@ flutter run
 
 You can directly install the app using the APK file included in this repository:
 
- `app-release.apk`
+`app-release.apk`
 
 ---
 
 ## Demo
 
-A short demo video is included in this repo:
+A demo video is included in this repository:
 
- `demo.mp4`
+`demo.mp4`
 
 ---
 
 ## Why This Matters
 
-This project is a small step towards:
+This project aims to:
 
-* Reducing food waste
-* Helping people in need
-* Making better use of available resources
+* Reduce food wastage
+* Help people in need
+* Improve resource utilization
+* Enable real-time coordination
 
-Even a simple system like this can make a meaningful difference if scaled properly.
+Even a simple system like this can create a meaningful impact when scaled.
 
 ---
 
-## Team
+## Team (VH)
 
-* Ch. Manas Vivek (Team Leader)
-* M. Laxmi Nivas
-* S. Ram Snehal
+* **Ch. Manas Vivek** (Team Leader)
+* **M. Laxmi Nivas**
+* **S. Ram Snehal**
 
 ---
 
 ## Hackathon
 
-Built during **Vashisht Hackathon 3.0**
+Developed during **Vashisht Hackathon 3.0**
