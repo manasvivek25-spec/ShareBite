@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../widgets/logo.dart';
 import 'donor_screen.dart';
 import 'receiver_screen.dart';
+import 'delivery_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -24,12 +25,10 @@ class HomeScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
 
-              // 🔥 LOGO
+              // 🔥 LOGO + TITLE
               Logo(size: 80),
-
               SizedBox(height: 10),
 
-              // 🔥 BRAND NAME
               Text(
                 "ShareBite",
                 style: TextStyle(
@@ -41,7 +40,6 @@ class HomeScreen extends StatelessWidget {
 
               SizedBox(height: 5),
 
-              // 🔥 CAPTION
               Text(
                 "Share food, save lives",
                 style: TextStyle(
@@ -53,7 +51,6 @@ class HomeScreen extends StatelessWidget {
 
               SizedBox(height: 30),
 
-              // 🔥 TITLE
               Text(
                 "Choose Your Role",
                 style: TextStyle(
@@ -64,7 +61,7 @@ class HomeScreen extends StatelessWidget {
 
               SizedBox(height: 20),
 
-              // 🔥 BUTTON ROW
+              // 🔥 FIRST ROW (Donor + Receiver)
               Row(
                 children: [
 
@@ -144,6 +141,49 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ),
 
+                ],
+              ),
+
+              // 🔥 SECOND ROW (Delivery centered)
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Expanded(
+                    child: InkWell(
+                      borderRadius: BorderRadius.circular(15),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (_) => DeliveryScreen()),
+                        );
+                      },
+                      child: Card(
+                        elevation: 6,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                        margin: EdgeInsets.all(10),
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(vertical: 30),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text("🚚", style: TextStyle(fontSize: 50)),
+                              SizedBox(height: 10),
+                              Text(
+                                "Delivery",
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.orange,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
                 ],
               ),
 

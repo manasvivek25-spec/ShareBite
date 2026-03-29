@@ -8,28 +8,29 @@ class DonorScreen extends StatefulWidget {
 }
 
 class _DonorScreenState extends State<DonorScreen> {
+  final _formKey = GlobalKey<FormState>();
+
   final TextEditingController foodController = TextEditingController();
   final TextEditingController quantityController = TextEditingController();
   final TextEditingController locationController = TextEditingController();
   final TextEditingController expiryController = TextEditingController();
 
   void submitFood() async {
-    print("STEP 1: Button clicked");
+    if (!_formKey.currentState!.validate()) return;
 
     try {
-      // Convert expiry safely
-      int expiryMinutes = int.tryParse(expiryController.text) ?? 60;
-
       await FirebaseFirestore.instance.collection('food_posts').add({
         'food_name': foodController.text,
         'quantity': quantityController.text,
         'location': locationController.text,
-        'expiry_minutes': expiryMinutes, 
+        'expiry_minutes': int.parse(expiryController.text),
+
         'status': 'available',
+        'delivery_status': 'none',
+        'assigned_agent': '',
+
         'timestamp': FieldValue.serverTimestamp(),
       });
-
-      print("STEP 2: Data sent successfully");
 
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text("Food Submitted!")),
@@ -49,55 +50,86 @@ class _DonorScreenState extends State<DonorScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-  elevation: 3,
-  flexibleSpace: Container(
-    decoration: BoxDecoration(
-      gradient: LinearGradient(
-        colors: [
-          Color(0xFF2E7D32),
-          Color(0xFF1565C0),
-        ],
-      ),
-    ),
-  ),
+        backgroundColor: Colors.green,
+        elevation: 2,
+        title: Row(
+          children: [
+            Logo(size: 30),
+            SizedBox(width: 10),
+            Text("ShareBite"),
+          ],
+        ),
       ),
 
       body: Padding(
         padding: EdgeInsets.all(16),
-        child: Column(
-          children: [
+        child: Form(
+          key: _formKey,
+          child: Column(
+            children: [
 
-            TextField(
-              controller: foodController,
-              decoration: InputDecoration(labelText: "Food Name"),
-            ),
-
-            TextField(
-              controller: quantityController,
-              decoration: InputDecoration(labelText: "Quantity"),
-            ),
-
-            TextField(
-              controller: locationController,
-              decoration: InputDecoration(labelText: "Location"),
-            ),
-
-            TextField(
-              controller: expiryController,
-              decoration: InputDecoration(
-                labelText: "Expiry (minutes)",
+              TextFormField(
+                controller: foodController,
+                decoration: InputDecoration(labelText: "Food Name"),
+                validator: (value) {
+                  if (value == null || value.trim().isEmpty) {
+                    return "Enter food name";
+                  }
+                  return null;
+                },
               ),
-              keyboardType: TextInputType.number,
-            ),
 
-            SizedBox(height: 20),
+              TextFormField(
+                controller: quantityController,
+                decoration: InputDecoration(labelText: "Quantity"),
+                keyboardType: TextInputType.number,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return "Enter quantity";
+                  }
+                  if (int.tryParse(value) == null) {
+                    return "Enter valid number";
+                  }
+                  return null;
+                },
+              ),
 
-            ElevatedButton(
-              onPressed: submitFood,
-              child: Text("Submit"),
-            ),
+              TextFormField(
+                controller: locationController,
+                decoration: InputDecoration(labelText: "Location"),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return "Enter location";
+                  }
+                  return null;
+                },
+              ),
 
-          ],
+              TextFormField(
+                controller: expiryController,
+                decoration: InputDecoration(labelText: "Expiry (minutes)"),
+                keyboardType: TextInputType.number,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return "Enter expiry time";
+                  }
+                  int? val = int.tryParse(value);
+                  if (val == null || val <= 0) {
+                    return "Enter valid minutes";
+                  }
+                  return null;
+                },
+              ),
+
+              SizedBox(height: 20),
+
+              ElevatedButton(
+                onPressed: submitFood,
+                child: Text("Submit"),
+              ),
+
+            ],
+          ),
         ),
       ),
     );

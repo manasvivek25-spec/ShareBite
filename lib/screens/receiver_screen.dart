@@ -130,26 +130,46 @@ class ReceiverScreen extends StatelessWidget {
     fontWeight: FontWeight.bold,
   ),
 ),
+Text(
+  "🚚 Delivery: ${data['delivery_status'] ?? 'Not assigned'}",
+  style: TextStyle(color: Colors.orange),
+),
+
+Text(
+  "👤 Agent: ${data['assigned_agent'] ?? 'Not assigned'}",
+),
                       SizedBox(height: 10),
 
-                      Align(
-                        alignment: Alignment.centerRight,
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Color(0xFF2E7D32),
-                          ),
-                          child: Text(
-                            "Accept",
-                            style: TextStyle(color: Colors.white),
-                          ),
-                          onPressed: () {
-                            FirebaseFirestore.instance
-                                .collection('food_posts')
-                                .doc(data.id)
-                                .update({'status': 'accepted'});
-                          },
-                        ),
-                      ),
+                     Row(
+  mainAxisAlignment: MainAxisAlignment.end,
+  children: [
+
+    // ✅ Accept Button
+    ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: Color(0xFF2E7D32),
+      ),
+      child: Text(
+        "Accept",
+        style: TextStyle(color: Colors.white),
+      ),
+      onPressed: () {
+        FirebaseFirestore.instance
+            .collection('food_posts')
+            .doc(data.id)
+            ..update({
+  'status': 'accepted',
+  'delivery_status': 'pending',
+  'assigned_agent': 'Agent 1',
+});
+      },
+    ),
+
+
+    
+
+  ],
+),
 
                     ],
                   ),
