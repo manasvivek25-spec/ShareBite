@@ -48,8 +48,8 @@ The app also prioritizes food based on expiry so that items that may go bad soon
 If you want to try it locally:
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/sharebite.git
-cd sharebite
+git clone https://github.com/manasvivek25-spec/ShareBite.git
+cd ShareBite
 flutter pub get
 flutter run
 ```
@@ -86,9 +86,9 @@ Even a simple system like this can make a meaningful difference if scaled proper
 
 ## Team
 
-* Your Name (Team Leader)
-* Member 2
-* Member 3
+* Ch. Manas Vivek (Team Leader)
+* M. Laxmi Nivas
+* S. Ram Snehal
 
 ---
 
